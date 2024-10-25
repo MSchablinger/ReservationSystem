@@ -1,0 +1,46 @@
+@startuml
+
+entity FieldType {
+    ft_id: Long <<PK>>
+    ft_name: String
+    ft_description: String
+}
+
+entity Field {
+    f_id: Long <<PK>>
+    f_name: String
+    f_type: FieldType
+    f_timeslot_duration: number
+    f_open_time: Time
+    f_close_time: Time
+}
+
+entity Customer {
+    c_id: Long <<PK>>
+    c_name: String
+    c_email: String
+    c_password: String
+    c_phone: String
+
+    c_street: String
+    c_city: String
+    c_zip: String
+    c_country: String
+    c_houseno: String
+}
+
+entity Reservation {
+    r_id: Long <<PK>>
+    r_date: Date
+    r_start_time: Time
+    r_end_time: Time
+    r_reservation_timestamp: Timestamp
+    r_field: Field <<FK>>
+    r_user: Customer <<FK>>
+}
+
+FieldType "1"--"*" Field
+Field "0..1"--"0..*" Reservation
+Customer "1"--"0..*" Reservation
+
+@enduml

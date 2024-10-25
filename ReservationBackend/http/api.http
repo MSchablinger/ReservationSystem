@@ -1,0 +1,45 @@
+GET {{BASE_URL}}/api/account/health
+
+###
+
+POST {{BASE_URL}}/api/account
+Content-Type: application/json
+
+{
+"name": "John Doe",
+"email": "johndoe@gmail.com",
+"phone": "+43 677 1234567890",
+"password": "password",
+"street": "Street",
+"city": "City",
+"zip": "1234",
+"country": "Country",
+"houseNo": "1"
+}
+> {% client.global.set("cust_id", response.body.id); %}
+
+###
+
+GET {{BASE_URL}}/api/account/{{cust_id}}
+
+###
+
+PUT {{BASE_URL}}/api/account
+Content-Type: application/json
+
+{
+"id": {{cust_id}},
+"name": "John Doe 2",
+"email": "johndoe2@gmail.com",
+"phone": "+43 677 3987409",
+"password": "password2",
+"street": "Street2",
+"city": "City2",
+"zip": "12345",
+"country": "Country2",
+"houseNo": "2"
+}
+
+###
+
+DELETE {{BASE_URL}}/api/account/{{cust_id}}
